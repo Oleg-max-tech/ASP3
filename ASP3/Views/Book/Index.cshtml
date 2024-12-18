@@ -1,0 +1,38 @@
+﻿@model List<BookStore.Models.Book>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Книжки</title>
+</head>
+<body>
+    <h1>Список книжок</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Назва</th>
+                <th>Автор</th>
+                <th>Ціна</th>
+                <th>Кількість сторінок</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author.Name</td>
+                    <td>@book.Price</td>
+                    <td>@book.Pages</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Book", new { id = book.Id })">Редагувати</a> |
+                        <a href="@Url.Action("Delete", "Book", new { id = book.Id })">Видалити</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="@Url.Action("AddBook", "Book")">Додати книжку</a>
+</body>
+</html>

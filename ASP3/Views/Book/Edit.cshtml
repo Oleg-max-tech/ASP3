@@ -1,0 +1,43 @@
+﻿@model BookStore.Models.Book
+@{
+    ViewBag.Title = "Редагувати книжку";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>@ViewBag.Title</h1>
+    <form method="post">
+        <label>Назва:</label>
+        <input type="text" name="Title" value="@Model?.Title" />
+        @Html.ValidationMessageFor(m => m.Title)
+        <br />
+
+        <label>Автор:</label>
+        <select name="AuthorId">
+            @foreach (var author in ViewBag.Authors as List<BookStore.Models.Author>)
+            {
+                <option value="@author.Id" @(author.Id == Model.AuthorId ? "selected" : "")>@author.Name</option>
+            }
+        </select>
+        @Html.ValidationMessageFor(m => m.AuthorId)
+        <br />
+
+        <label>Ціна:</label>
+        <input type="number" name="Price" value="@Model?.Price" />
+        @Html.ValidationMessageFor(m => m.Price)
+        <br />
+
+        <label>Кількість сторінок:</label>
+        <input type="number" name="Pages" value="@Model?.Pages" />
+        @Html.ValidationMessageFor(m => m.Pages)
+        <br />
+
+        <button type="submit">Зберегти зміни</button>
+    </form>
+    <a href="@Url.Action("Index", "Book")">Назад до списку книжок</a>
+</body>
+</html>
